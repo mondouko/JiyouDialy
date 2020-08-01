@@ -1,0 +1,48 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167751154-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167751154-1');
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/header.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$("#h-tab").on("click",function(){
+		$("#h-menu").css("display","block");
+	})
+	$("#h-tab2").on("click",function(){
+		$("#h-menu").css("display","none");
+	})
+</script>
+<div id = "h-space"></div>
+<div id = "h-container">
+
+		<div id = "h-title">
+			<div style = "margin:0;"> <img id = "icon" src = "icon/icon_512(2).png"> </div>
+			<div id = "h-mondouko" ><a href = "index">問答庫</a></div>
+		</div>
+		
+		<span>
+			<div><a href = "generator-d"><i class="fas fa-tags"></i>　記事を作成</a></div>
+			<div><a href = "typing"><i class="fas fa-gamepad"></i>　タイピング</a></div>
+			<div><a href = "about"><i class="fas fa-address-card"></i>　問答庫とは</a></div>
+			<div><a href = "news"><i class="fas fa-info-circle"></i>　お知らせ</a></div>
+		</span>
+
+		<label id = "h-tab" for = "h-input"><i class="fas fa-bars"></i></label>
+		<input id = "h-input" type = "checkbox">
+		<id id = "h-menu">
+			<label id = "h-tab2" for = "h-input"><i class="fas fa-times"></i>　閉じる</label>
+			<ul>
+				<li><a href = "generator-d"><i class="fas fa-tags"></i>　記事を作成</a></li>
+				<li><a href = "about"><i class="fas fa-address-card"></i>　問答庫とは</a></li>
+				<li><a href = "typing"><i class="fas fa-gamepad"></i>　タイピング</a></li>
+				<li><a href = "news"><i class="fas fa-info-circle"></i>　お知らせ</a></li>
+				<li></li>
+			</ul>
+		</id>
+</div>

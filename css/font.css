@@ -1,0 +1,33 @@
+@charset 'UTF-8';
+
+* {
+	outline:none;
+	font-family: "Helvetica","YuGothic","游ゴシック","Verdana", "Roboto", "Yu Gothic Medium", "游ゴシック Medium", "ヒラギノ角ゴ Pro W3", "ヒラギノ角ゴ Pro", "メイリオ", sans-serif;
+}
+
+ul{
+	list-style-type:none;
+}
+
+a {
+	text-decoration: none;
+	color:#333333;
+}
+
+body {
+	overflow-x: hidden;
+	margin: 0;
+	-o-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+img{
+	object-fit: cover;
+}
+
+i{
+	z-index:2;
+}

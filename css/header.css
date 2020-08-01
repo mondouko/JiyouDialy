@@ -1,0 +1,133 @@
+
+#icon{
+	width:40px;
+}
+#header1{
+	background-color:white;
+	color:#e65c1b;
+	margin:0;
+	width:calc(100vw - 20px);
+	padding:10px;
+	font-size:1em;
+	font-weight:600;
+	vertical-align:middle;
+	font-family:"游ゴシック light";
+	text-align:center;
+	box-shadow:0 0 10px #aaaaaa ;
+	position:fixed;
+	top:0;
+	z-index:10;
+}
+
+#h-space{
+	width:100vw;
+	position:absolute;
+	top:0;
+	height:60px;
+	z-index:-1;
+}
+
+
+@media(min-width:1000px){
+	#h-container{
+		width:1000px;
+	}
+}
+
+@media(max-width:1000px){
+	#h-container{
+		width:100%;
+	}
+}
+
+
+#h-menu, #h-input, #h-tab{
+	display:none;
+}
+#h-tab{
+	font-size:1.5em;
+	margin-right:20px;
+}
+#h-menu{
+	z-index:4;
+	width:80vw;
+	height:70vh;
+	position:fixed;
+	overflow:scroll;
+	list-style-type:none;
+	background-color:white;
+	transition:all ease 0.5s;
+	box-shadow:0 0 0  10000px rgba(0,0,0,0.7);
+	border-radius:10px;
+	top:0;
+	right:0;
+	left:0;
+	bottom:0;
+	margin:auto;
+	display:none;
+}
+
+#h-menu::-webkit-scrollbar{
+	display:none;
+}
+#h-tab2{
+	width:100%;
+	font-size:1.5em;
+	padding:0.5em 0;
+	border-bottom:solid 1px #cccccc;
+	display:block;
+}
+#h-menu ul{
+	font-size:1.5em;
+	width:100%;
+	list-style-type: none;
+	margin:0;
+	padding:0;
+}
+#h-menu li{
+	margin:0;
+	padding:0.5em 1em;
+	border-bottom:solid 1px #cccccc;
+}
+@media(max-width:900px){
+	#h-container span{
+		display:none;
+	}
+	#h-tab{
+		display:block;
+	}
+}
+
+#h-container{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	margin:auto;
+}
+
+#h-container div{
+	margin:0 20px;
+	display:inline-block;
+	vertical-align:middle;
+}
+
+#header1 a{
+	color:#333333;
+}
+
+#h-title{
+	height:40px;
+	display:inline-block;
+}
+
+#h-mondouko{
+	font-size:1.5em;
+	font-weight:600;
+	height:40px;
+}
+
+#h-mondouko a{
+	color:#e65c1b;
+	line-height:40px;
+}
