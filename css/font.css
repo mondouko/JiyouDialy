@@ -31,3 +31,11 @@ img{
 i{
 	z-index:2;
 }
+
+button{
+	cursor:pointer;
+	transition:all ease 0.3s;
+}
+button:hover{
+	transform:translateX(5px);
+}

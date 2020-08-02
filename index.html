@@ -22,10 +22,101 @@
 	</head>
 	<body>
 		<div id="header1"></div>
-		<h1>Nutrients Plus</h1>
 
-		
+		<div id = "hero">
+			<div class = "outer">
+				<div id = "herotext">
+					<h1>滋養日記</h1>
+					<h2>JIYOU DIALY</h2>
+					<p>毎日の食事の栄養素を記録しましょう。<br>結構めんどくさいよこれ</p>
+				</div>
+			</div>
+			
+			
+		</div>
+
+		<!--<div id = "data">
+			<p>8月2日　記録<span>983</span>日目</p>
+		</div>-->
+
+		<div class = "outer" id = "edit">
+			<h1>食事を記録する</h1>
+			<form onsubmit="return false">
+				<div>
+					<p>日付</p>
+					<select id = "month" name = "month">
+						<option value = "1">1</option>
+						<option value = "2">2</option>
+						<option value = "3">3</option>
+						<option value = "4">4</option>
+						<option value = "5">5</option>
+						<option value = "6">6</option>
+						<option value = "7">7</option>
+						<option value = "8" selected>8</option>
+						<option value = "9">9</option>
+						<option value = "10">10</option>
+						<option value = "11">11</option>
+						<option value = "12">12</option>
+					</select>
+					<span>月</span>
+					<select id = "date" name = "date">
+						<option value = "0">0</option>
+						<option value = "1">1</option>
+						<option value = "2" selected>2</option>
+						<option value = "3">3</option>
+						<option value = "4">4</option>
+						<option value = "5">5</option>
+						<option value = "6">6</option>
+						<option value = "7">7</option>
+						<option value = "8">8</option>
+						<option value = "9">9</option>
+						<option value = "10">10</option>
+						<option value = "11">11</option>
+						<option value = "12">12</option>
+						<option value = "13">13</option>
+						<option value = "14">14</option>
+						<option value = "15">15</option>
+						<option value = "16">16</option>
+						<option value = "17">17</option>
+						<option value = "18">18</option>
+						<option value = "19">19</option>
+						<option value = "20">20</option>
+						<option value = "21">21</option>
+						<option value = "22">22</option>
+						<option value = "23">23</option>
+						<option value = "24">24</option>
+						<option value = "25">25</option>
+						<option value = "26">26</option>
+						<option value = "27">27</option>
+						<option value = "28">28</option>
+						<option value = "29">29</option>
+						<option value = "30">30</option>
+						<option value = "31">31</option>
+					</select>
+					<span>日</span>
+				</div>
+				<div><p>料理名</p><input type = "text" ></div>
+				<div class = "ingredients">
+					<p>食品名</p><input class = "ingname" type = "text" placeholder = "食品名　例｜かんぴょう">
+					<p>摂取量(g)</p><input type = "text"><span class = "weight">g</span>
+				</div>
+				<button id = "adding">+ 食品を追加する</button>
+				<div>
+					<p>コメント</p><textarea id = "comment" name = "comment" rows = "3" cols = "213089"></textarea>
+				</div>
+				<button id = "submit">決定する</button>
+			</form>
+		</div>
+
+		<div class = "outer" id = "analysis">
+			<h1>あなたの栄養データ</h1>
+		</div>
+
+		<div class = "outer" id = "log">
+			<h1>これまでの記録</h1>
+		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/general.js"></script>
+		<script src="js/index.js"></script>
 	</body>
 </html>

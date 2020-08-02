@@ -1,3 +1,166 @@
 @charset 'UTF-8';
 
+.outer{
+	padding:0;
+	margin:0;
+}
+body > .outer{
+	margin:30px auto;
+	width:calc(100vw - 60px - 40px);
+}
+@media(min-width:800px){
+	.outer{
+		width:800px;
+		margin:auto;
+	}
+}
 
+#hero{
+	margin:0;
+	background:url(../images/hero.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc(100vw - 60px);
+    height:300px;
+    padding:30px;
+}
+#herotext{
+	border:solid 1px white;
+	padding:20px 30px;
+	width:400px;
+	background-color:rgba(0,0,0,0.2);
+}
+@media(max-width:520px){
+	#herotext{
+		width:calc(100vw - 60px - 60px);
+	}
+}
+#hero h1, #hero h2, #hero p{
+	color:white;
+	text-align:left;
+	font-family: "游明朝",serif;
+	padding:0;
+	margin:0;
+}
+#hero h1{
+	font-size:40px;
+	margin-bottom:0px;
+}
+#hero h2{
+	margin-top:0;
+	margin-bottom:10px;
+	font-size:22px;
+}
+#hero p{
+	margin:10px 0;
+	color:white;
+	font-size:17px;
+}
+
+
+
+
+
+#data{
+	background-color:#75584e;
+	font-weight:bold;
+	padding:20px;
+	color:white;
+	padding:15px 20px;
+	border-top:solid 2px white;
+}
+#data p{
+	margin:0;
+	margin:0 10px;
+	font-size:20px;
+	text-align:center;
+}
+
+h1{
+	font-size:25px;
+	margin-top:0;
+	color:#75584e;
+}
+
+
+
+
+
+#edit{
+	background-color:#f5f5f5;
+	border-radius:20px;
+	padding:20px 30px;
+	width:600px;
+	border:solid 1px #75584e;
+	margin-top:-50px;
+	box-shadow:0 0 15px #777777;
+}
+@media(max-width:700px){
+	#edit{
+		width:calc(100% - 40px - 40px);
+		padding:20px;
+	}
+}
+#edit form div{
+	margin:10px 0 ;
+}
+#edit form div p{
+	display:inline-block;
+	margin:0;
+	margin-right:20px;
+	font-weight:bold;
+	color:#75584e;
+}
+.ingredients{
+	border-bottom:solid 1px #cccccc;
+	padding:10px 0;
+	margin:0 !important;
+}
+.ingredients p{
+	margin-left:10px !important;
+}
+#edit form input,#edit form select{
+	padding:0.5em 1em;
+	border-radius:5px;
+	border:solid 1px #cccccc;
+	transition:all ease 0.3s;
+}
+#edit form input:focus,textarea:focus{
+	border:solid 1px #75584e;
+}
+#edit form span{
+	margin-right:15px;
+	margin-left:5px;
+}
+option{
+	padding:0.1em 0.5em !important;
+	border-bottom:solid 1px #cccccc !important;
+}
+textarea{
+	margin-top:5px;
+	resize:vertical;
+	width:calc(100% - 2em);
+	margin:5px auto;
+	border:solid 1px #cccccc;
+	border-radius:5px;
+	transition:all ease 0.3s;
+	padding:0.5em 1em;
+}
+#edit button:not(#submit){
+	margin-top:10px;
+	margin-bottom:20px;
+	background-color:#75584e;
+	color:white;
+	border:none;
+	padding:0.2em 1em;
+	border-radius:1.4em;
+}
+#submit{
+	background-color:#d3890f;
+	padding:0.3em 1em;
+	border-radius:10px;
+	font-size:17px;
+	font-weight:bold;
+	color:white;
+	border:none;
+}
