@@ -1,3 +1,3 @@
 $(document).on("click","#adding",function(){
-	$(this).before('<div class = "ingredients"><p>食品名</p><input class = "ingname" type = "text" placeholder = "食品名　例｜かんぴょう"><p>摂取量(g)</p><input type = "text"><span class = "weight">g</span></div>');	
+	$(this).before('<div class = "ingredients"><p>食品名</p><input class = "ingname" type = "text" placeholder = "食品名　例｜かんぴょう"><br><p>分類</p><select id = "fkind" name = "fkind"><option value = "1">乳・乳製品</option><option value = "2">卵</option><option value = "3">魚介・肉</option><option value = "4">豆・豆製品</option><option value = "5">野菜</option><option value = "6">いも類</option><option value = "7">果物</option><option value = "8">穀類</option><option value = "9">油脂</option><option value = "10">砂糖</option></select><p>摂取量(g)</p><input  class = "weight" type = "text"><span>g</span></div>');	
 })
