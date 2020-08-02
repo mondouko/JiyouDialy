@@ -124,6 +124,7 @@ h1{
 	border-radius:5px;
 	border:solid 1px #cccccc;
 	transition:all ease 0.3s;
+	margin:5px 0;
 }
 #edit form input:focus,textarea:focus{
 	border:solid 1px #75584e;
@@ -163,4 +164,19 @@ textarea{
 	font-weight:bold;
 	color:white;
 	border:none;
+}
+.weight{
+	width:3em;
+	padding:0.5em ;
+}
+@media(max-width:500px){
+	#edit{
+
+	}
+	#edit h1{
+		text-align:center;
+	}
+	.ingname{
+		width:calc(100% - 2em);
+	}
 }
