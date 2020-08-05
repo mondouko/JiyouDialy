@@ -39,9 +39,9 @@
 			<p>8月2日　記録<span>983</span>日目</p>
 		</div>-->
 
-		<div class = "outer" id = "edit">
+		<div class = "edit outer">
 			<h1>食事を記録する</h1>
-			<form onsubmit="return false">
+			<form id = "editform" onsubmit="return false">
 				<div>
 					<p>日付</p>
 					<select id = "month" name = "month">
@@ -94,8 +94,16 @@
 						<option value = "31">31</option>
 					</select>
 					<span>日</span>
+					<select id = "bld" name = "bld">
+						<option value = "0">朝食</option>
+						<option value = "1">昼食</option>
+						<option value = "2">夕食</option>
+						<option value = "3">間食</option>
+					</select>
 				</div>
 				<div><p>料理名</p><input type = "text" ></div>
+				<div><p>合計料理重量</p><input type = "text" placeholder = "未入力可"><span>g</span></div>
+				<div><p>あなたの食事摂取重量</p><input type = "text" placeholder = "未入力可"><span>g</span></div>
 				<div class = "ingredients">
 					<p>食品名</p><input class = "ingname" type = "text" placeholder = "食品名　例｜かんぴょう">
 					<br><p>分類</p><select id = "fkind" name = "fkind">
@@ -110,12 +118,12 @@
 						<option value = "9">油脂</option>
 						<option value = "10">砂糖</option>
 					</select>
-					<p>摂取量(g)</p><input  class = "weight" type = "text"><span>g</span>
+					<p>使用量(g)</p><input  class = "weight" type = "text"><span>g</span>
 					
 				</div>
 				<button id = "adding">+ 食品を追加する</button>
 				<div>
-					<p>コメント</p><textarea id = "comment" name = "comment" rows = "3" cols = "213089"></textarea>
+					<p>コメント</p><textarea class = "comment" name = "comment" rows = "3" cols = "213089"></textarea>
 				</div>
 				<button id = "submit">決定する</button>
 			</form>
@@ -127,6 +135,20 @@
 
 		<div class = "outer" id = "log">
 			<h1>これまでの記録</h1>
+			<form class = "edit ' +  bldclass[Number($(select).eq(2).prop("value"))] + '" onsubmit="return false">
+					<p class = "l-time"><span class = "l-month">8</span>月<span class = "l-date">6</span>日　<span class = "l-bld">朝食</span></p>
+					<h2 class = "l-ingname">ビビンバ</h2>
+
+					
+					<div class = "l-ing">
+						<p>食品名と摂取量</p>
+						<div><p>もやし</p><p>60g</p></div>
+						<div><p>ごはん</p><p>160g</p></div>
+						<div><p>にく</p><p>50g</p></div>
+						<div><p>まめ</p><p>60g</p></div>
+					</div>
+				</div>
+			</form>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/general.js"></script>
