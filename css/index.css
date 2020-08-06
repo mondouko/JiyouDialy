@@ -2,7 +2,6 @@
 
 .outer{
 	padding:0;
-	
 	margin:30px auto;
 }
 body > .outer:not(.edit){
@@ -14,7 +13,11 @@ body > .outer:not(.edit){
 		margin:auto;
 	}
 }
-
+@media(max-width:600px){
+	.outer{
+		width:calc(100vw - 40px) !important;
+	}
+}
 #hero{
 	margin:0;
 	background:url(../images/hero.jpg);
@@ -80,8 +83,16 @@ h1{
 	font-size:25px;
 	margin-top:0;
 	color:#75584e;
+	margin-bottom:20px;
 }
-
+#log h1{
+	margin-bottom:40px;
+}
+@media(max-width:600px){
+	h1{
+		font-size:22px;
+	}
+}
 
 
 
@@ -105,10 +116,15 @@ body > div:nth-of-type(3){
 	border:solid 1px #75584e;
 	box-shadow:0 0 15px #aaaaaa;
 }
-@media(max-width:700px){
+@media(max-width:600px){
 	.edit{
-		width:calc(100vw - 40px - 40px);
+		width:calc(100vw - 40px - 40px) !important;
 		padding:20px;
+		margin-right:auto;
+		margin-left:auto;
+	}
+	#log .edit{
+		padding:0px 20px;
 	}
 }
 .edit form div{
@@ -205,9 +221,15 @@ textarea{
 	padding:5px 30px;
 	margin:20px -30px;
 }
+@media(max-width:600px){
+	.l-ing{
+		margin:20px -20px;
+	}
+}
 .l-ing > p{
 	width:calc(100% - 40px) !important;
 	margin:5px 0 !important;
+	font-weight:bold ;
 }
 .l-ing div{
 	background-color:white;
@@ -232,11 +254,40 @@ textarea{
 	top:calc(50% - 8px);
 	display:block;
 }
+.l-ing div[data-fg="0"]:before,.l-ing div[data-fg="1"]:before{
+	background-color:white;
+	border:solid 1px #aaaaaa;
+	width:14px;
+}
+.l-ing div[data-fg="2"]:before,.l-ing div[data-fg="3"]:before{
+	background-color:#d72626;
+}
+.l-ing div[data-fg="4"]:before,.l-ing div[data-fg="5"]:before,.l-ing div[data-fg="6"]:before{
+	background-color:forestgreen;
+}
+.l-ing div[data-fg="7"]:before,.l-ing div[data-fg="8"]:before,.l-ing div[data-fg="9"]:before{
+	background-color:#d48b14;
+}
+
+
+
+
+
 .l-ing p{
 	display:inline-block;
 	width:calc(50%);
 	margin:0;
 	font-size:16px;
+}
+.l-ing > p:after{
+	font-family: "Font Awesome 5 Free";
+	content: "\f078";
+	margin-left:1em;
+	transition:all ease 0.3s;
+	transform:rotate(0deg);
+}
+.show:after{
+	transform:rotate(180deg) !important;
 }
 
 .l-ing p:last-child{
@@ -289,3 +340,16 @@ textarea{
 	font-size:20px;
 }
 
+
+
+.b-seet{
+	width:300px !important;
+	height:300px !important;
+	text-align:left;
+}
+@media(max-width:500px){
+	.b-seet{
+		width:calc(100vw - 40px - 40px);
+		height:calc(100vw - 40px - 40px);
+	}
+}
