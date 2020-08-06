@@ -1,5 +1,5 @@
 $(document).on("click","#adding",function(){
-	$(this).before('<div class = "ingredients"><p>食品名</p><input class = "ingname" type = "text"><br><p>分類</p><select id = "fkind" name = "fkind"><option value = "1">乳・乳製品</option><option value = "2">卵</option><option value = "3">魚介・肉</option><option value = "4">豆・豆製品</option><option value = "5">野菜</option><option value = "6">いも類</option><option value = "7">果物</option><option value = "8">穀類</option><option value = "9">油脂</option><option value = "10">砂糖</option></select><p>使用量(g)</p><input  class = "weight" type = "text"><span>g</span></div>');	
+	$(this).before('<div class = "ingredients"><p>食品名</p><input class = "ingname" type = "text"><br><p>分類</p><select id = "fkind" name = "fkind"><option value = "0">乳・乳製品</option><option value = "1">卵</option><option value = "2">魚介・肉</option><option value = "3">豆・豆製品</option><option value = "4">野菜</option><option value = "5">いも類</option><option value = "6">果物</option><option value = "7">穀類</option><option value = "8">油脂</option><option value = "9">砂糖</option></select><p>使用量(g)</p><input  class = "weight" type = "text"><span>g</span></div>');	
 });
 
 var bld = ["朝食","昼食","夕食","間食"];
@@ -30,9 +30,16 @@ function makecode(){
 	code = "";
 	$.each($("#log form"),function(ind,val){
 		var thisform = $("#log form").eq(ind)
-		code = code + $(thisform).children(".l-month") + "&&" + $(thisform).children(".l-date") + "&&" + $(thisform).children(".bld") + "&&";
-		code = code + $(thisform).children(".l-ingname") + "&&";
+		code = code + $(thisform).children(".l-month").text() + "&&" + $(thisform).children(".l-date").text() + "&&" + $(thisform).children(".bld").text() + "&&";
+		code = code + $(thisform).children(".l-ingname").text() + "&&" + $(thisform) + "&&" + $(thisform).data("portion");
+		code = code + "{{";
+		$.each($(thisform).children(".l-ing").children("div"),function(ind2,val2){
+			var thisblock = $(thisform).children(".l-ing").children("div").eq(ind2);
+			code = code + $(thisblock).data("fg") + "&&" + $(thisblock).children("p").eq(0).text() + "&&" + $(thisblock).children("p").eq(1).text() + "&&";
+		});
+		code = code + "}}" + $(thisform).children(".l-comment").text() + "&&&";
 	});
+	alert(code);
 };
 
 
@@ -40,7 +47,7 @@ function makecode(){
 $("#submit").on("click",function(){
 	input = $("#editform input[type='text']");
 	select = $("#editform select");
-	$("#log h1").after('<form class = "edit ' +  bldclass[Number($(select).eq(2).prop("value"))] + '" onsubmit="return false"><p class = "l-time"><span class = "l-month">' + $(select).eq(0).prop("value") + '</span>月<span class = "l-date">' + $(select).eq(1).prop("value") + '</span>日　<span class = "l-bld">' + bld[Number($(select).eq(2).prop("value"))] + '</span></p><h2 class = "l-ingname">' + $(input).eq(0).prop("value") + '</h2></div>');
+	$("#log h1").after('<form class = "edit ' +  bldclass[Number($(select).eq(2).prop("value"))] + '" onsubmit="return false" data-sum="' + $(input).eq(1).prop("value") + '" data-portion="' + $(input).eq(2).prop("value") + '"><p class = "l-time"><span class = "l-month">' + $(select).eq(0).prop("value") + '</span>月<span class = "l-date">' + $(select).eq(1).prop("value") + '</span>日　<span class = "l-bld">' + bld[Number($(select).eq(2).prop("value"))] + '</span></p><h2 class = "l-ingname">' + $(input).eq(0).prop("value") + '</h2></div>');
 	
 	thislog = $("#log form").eq(0);
 	if(window.innerWidth > 600){
@@ -63,6 +70,8 @@ $("#submit").on("click",function(){
 	}
 	makechart(0);
 	$(thislog).append('<p class = "l-comment">' + $(".comment").eq(0).val() + '</p>');
+	makecode();
+	savetows();
 });
 
 $(document).on("click",".l-ing > p",function(){
