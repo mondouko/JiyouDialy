@@ -100,7 +100,7 @@ h1{
 .edit{
 	padding:20px 30px;
 	width:600px;
-	margin:20px auto;
+	margin:30px auto;
 	background-color:white;
 	border:solid 1px #cccccc;
 	border-radius:10px;
@@ -230,6 +230,7 @@ textarea{
 	width:calc(100% - 40px) !important;
 	margin:5px 0 !important;
 	font-weight:bold ;
+	cursor:pointer;
 }
 .l-ing div{
 	background-color:white;
