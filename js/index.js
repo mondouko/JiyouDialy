@@ -21,7 +21,7 @@ function savetows(code){
 }
 
 function loading(){
-	var code = localStorage.getItem("log").split("&&&")
+	var code = localStorage.getItem("log").split("&&&");
     $.each(code,function(ind,val){
     	console.log(ind);
     	/*var block1 = val.split("{{")[0].split("&&");
@@ -40,7 +40,7 @@ function loading(){
 		
     });
 }
-loading();
+//loading();
 function makecode(){
 	code = "";
 	$.each($("#log form"),function(ind,val){
