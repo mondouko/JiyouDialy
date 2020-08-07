@@ -9,7 +9,7 @@ body > .outer:not(.edit){
 }
 @media(min-width:800px){
 	.outer{
-		width:800px;
+		max-width:800px !important;
 		margin:auto;
 	}
 }
