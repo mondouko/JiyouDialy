@@ -21,17 +21,32 @@ function savetows(code){
 }
 
 function loading(){
-    $.each(localStorage.getItem("log").split("&&&"),function(ind,val){
-
+	var code = localStorage.getItem("log").split("&&&")
+    $.each(code,function(ind,val){
+    	console.log(ind);
+    	/*var block1 = val.split("{{")[0].split("&&");
+    	var block2 = val.split("{{")[1].split("}}")[0].split("&&");
+    	var block3 = val.split("{{")[1].split("}}")[1].split("&&");
+    	
+    	$("#log > h1").after('<form class = "edit ' + block1[2] + '" onsubmit = "return false" data-sum = "' + block1[4] + '" data-portion = "' + block1[5] + '"></form>');
+    	var thislog = $("#log form").eq(0);
+    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span><span class = "l-date">' + block1[1] + '</span></p>');
+    	$(thislog).append('<h2 class = "ingname">' + block[3] + '</h2>');
+    	if(window.innerWidth > 600){
+			$(thislog).append('<canvas class="b-sheet" width="400" height="200"></canvas>');
+		}else{
+			$(thislog).append('<canvas class="b-sheet" width="200" height="200"></canvas>');
+		}*/
+		
     });
 }
-
+loading();
 function makecode(){
 	code = "";
 	$.each($("#log form"),function(ind,val){
 		var thisform = $("#log form").eq(ind)
-		code = code + $(thisform).children(".l-month").text() + "&&" + $(thisform).children(".l-date").text() + "&&" + $(thisform).children(".bld").text() + "&&";
-		code = code + $(thisform).children(".l-ingname").text() + "&&" + $(thisform) + "&&" + $(thisform).data("portion");
+		code = code + $(thisform).children(".l-time").children(".l-month").text() + "&&" + $(thisform).children(".l-time").children(".l-date").text() + "&&" + $(thisform).children(".l-time").children(".l-bld").text() + "&&";
+		code = code + $(thisform).children(".l-ingname").text() + "&&" + $(thisform).data("sum") + "&&" + $(thisform).data("portion");
 		code = code + "{{";
 		$.each($(thisform).children(".l-ing").children("div"),function(ind2,val2){
 			var thisblock = $(thisform).children(".l-ing").children("div").eq(ind2);
@@ -71,7 +86,7 @@ $("#submit").on("click",function(){
 	makechart(0);
 	$(thislog).append('<p class = "l-comment">' + $(".comment").eq(0).val() + '</p>');
 	makecode();
-	savetows();
+	savetows(code);
 });
 
 $(document).on("click",".l-ing > p",function(){
