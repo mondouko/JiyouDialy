@@ -20,7 +20,7 @@ body > .outer:not(.edit){
 }
 #hero{
 	margin:0;
-	background:url(../images/hero.jpg);
+	background:url(../images/hero1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width: calc(100vw - 60px);
