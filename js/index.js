@@ -16,31 +16,34 @@ var code = "";
 
 function savetows(code){
 	localStorage.setItem("log",code);
-	localStrage.setItem("age",Number($("#age").val()));
-	localStrage.setItem("gender",Number($("#gender").val()));
+	localStorage.setItem("age",Number($("#age").val()));
+	localStorage.setItem("gender",Number($("#gender").val()));
 }
 
 function loading(){
 	var code = localStorage.getItem("log").split("&&&");
     $.each(code,function(ind,val){
-    	console.log(ind);
-    	/*var block1 = val.split("{{")[0].split("&&");
+    	console.log(val.split("{{")[1].split("}}")[0].split("&&"));
+    	var block1 = val.split("{{")[0].split("&&");
     	var block2 = val.split("{{")[1].split("}}")[0].split("&&");
     	var block3 = val.split("{{")[1].split("}}")[1].split("&&");
     	
     	$("#log > h1").after('<form class = "edit ' + block1[2] + '" onsubmit = "return false" data-sum = "' + block1[4] + '" data-portion = "' + block1[5] + '"></form>');
     	var thislog = $("#log form").eq(0);
-    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span><span class = "l-date">' + block1[1] + '</span></p>');
-    	$(thislog).append('<h2 class = "ingname">' + block[3] + '</h2>');
+    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span>月<span class = "l-date">' + block1[1] + '日</span></p>');
+    	$(thislog).append('<h2 class = "ingname">' + block1[3] + '</h2>');
     	if(window.innerWidth > 600){
 			$(thislog).append('<canvas class="b-sheet" width="400" height="200"></canvas>');
 		}else{
 			$(thislog).append('<canvas class="b-sheet" width="200" height="200"></canvas>');
-		}*/
-		
+		}
+    	$(thislog).append('<div class = "l-ing"><p>食品名と摂取量</p></div>');
+		for(var i=0;i < block2.length;i=i+3){
+			$(thislog).children(".l-ing").append('<div data-fg = "' + block2[i] + '"><p>' + block2[i + 1] + '</p><p>' + block2[i + 2] + '</p></div>')
+		}
     });
 }
-//loading();
+loading();
 function makecode(){
 	code = "";
 	$.each($("#log form"),function(ind,val){
@@ -52,9 +55,10 @@ function makecode(){
 			var thisblock = $(thisform).children(".l-ing").children("div").eq(ind2);
 			code = code + $(thisblock).data("fg") + "&&" + $(thisblock).children("p").eq(0).text() + "&&" + $(thisblock).children("p").eq(1).text() + "&&";
 		});
+		code = code.slice(0,-2);
 		code = code + "}}" + $(thisform).children(".l-comment").text() + "&&&";
 	});
-	alert(code);
+	code = code.slice(0,-3);
 };
 
 
