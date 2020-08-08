@@ -12,7 +12,6 @@ var select = 0;
 var thislog = 0;
 var portion = 0;
 var code = "";
-localStorage.setItem("#log","");
 
 function savetows(code){
 	localStorage.setItem("log",code);
@@ -21,9 +20,9 @@ function savetows(code){
 }
 
 function loading(){
-	var code = localStorage.getItem("#log").split("&&&");
+	var code = localStorage.getItem("log").split("&&&");
+	alert(code);
     $.each(code,function(ind,val){
-    	console.log(val.split("{{")[1].split("}}")[0].split("&&"));
     	var block1 = val.split("{{")[0].split("&&");
     	var block2 = val.split("{{")[1].split("}}")[0].split("&&");
     	var block3 = val.split("{{")[1].split("}}")[1].split("&&");
@@ -66,7 +65,7 @@ function loading(){
 		}
     });
 }
-if(localStorage.getItem("#log") != ""){
+if(localStorage.getItem("log") != ""){
 	loading();
 }
 function makecode(){
@@ -111,17 +110,16 @@ $("#submit").on("click",function(){
 		});
 		
 	}
+	alert(lognum);
 	var container = '<form class = "edit ' +  bldclass[Number($(select).eq(2).prop("value"))] + '" onsubmit="return false" data-sum="' + $(input).eq(1).prop("value") + '" data-portion="' + $(input).eq(2).prop("value") + '" data-year = "' + $("#editform .year").children("input").prop("value")+ '"><p class = "l-time"><span class = "l-month">' + $(select).eq(0).prop("value") + '</span>月<span class = "l-date">' + $(select).eq(1).prop("value") + '</span>日　<span class = "l-bld">' + bld[Number($(select).eq(2).prop("value"))] + '</span></p><h2 class = "l-ingname">' + $(input).eq(0).prop("value") + '</h2></div>';
 	if($("#log form").length == 0){
-		alert();
 		$("#log h1").after(container);
 	}else if(lognum == $("#log form").length){
-		$("#log form").eq(lognum).after(container);
+		$("#log form").eq(lognum - 1).after(container);
 	}else{
 		$("#log form").eq(lognum).before(container);
 	}
 	thislog = $("#log form").eq(lognum);
-	alert(lognum);
 	if(window.innerWidth > 600){
 		$(thislog).append('<canvas class="b-sheet" width="400" height="200"></canvas>');
 	}else{
@@ -156,74 +154,88 @@ var cdata1 = [];
 var cdata2 = [];
 var sum = 0;
 function makechart(logind){
-	cdata1 = [];
-	cdata2 = [];
-	
-	var thislog = $("#log form").eq(logind);
-	if($("#gender").val() == "m"){
-		cdata1 = fsm[Number($("#age").val())].split(",");
-	}else if($("#gender").val() == "f"){
-		cdata1 = fsf[Number($("#age").val())].split(",");
-	}
+	if($("#log form").eq(logind).hasClass("sametime")){
 
-	$.each(cdata1,function(ind,val){
-		sum = 0;
-		$.each($(thislog).children(".l-ing").children("div"),function(ind2,val2){
-			if(Number($(thislog).children(".l-ing").children("div").eq(ind2).data("fg")) == ind){
-				sum = sum + Number($(thislog).children(".l-ing").children("div").eq(ind2).children("p").eq(1).text());
-			}
-		});
-		if(sum > cdata1[ind] / 3){
-			cdata2.push(100);
-		}else{
-			cdata2.push(sum * 300 / cdata1[ind]);
+	}else{
+		cdata1 = [];
+		cdata2 = [];
+		
+		
+		if($("#gender").val() == "m"){
+			cdata1 = fsm[Number($("#age").val())].split(",");
+		}else if($("#gender").val() == "f"){
+			cdata1 = fsf[Number($("#age").val())].split(",");
 		}
 		
-	});
-
-	var ctx = $(".b-sheet");
-	
-	new Chart(ctx, {
-		type:"radar",
-		data:{
-			labels:["乳・乳製品","卵","魚介・肉","豆・豆製品","野菜","いも類","果物","穀物","油脂","砂糖"],
-			datasets:[
-
-				{
-					label:"あなたの摂取量",
-					data:cdata2,
-					backgroundColor:"rgba(60,138,175,0.3)",
-					borderWidth:3,
-					pointBackgroundColor:"rgba(60,138,175,1)",
-					borderColor:"rgba(60,138,175,1)",
-					pointBorderWidth:0
-				},
-				/*{
-					label:"めやすの摂取量",
-					data:[100,100,100,100,100,100,100,100,100,100],
-					backgroundColor:"rgba(200,200,200,0)",
-					borderWidth:3,
-					pointBackgroundColor:"rgba(1,1,1,0)",
-					pointerBorderColor:"rgba(0,0,0,0)",
-					borderColor:"rgba(200,200,200,1)",
-					pointBorderWidth:0
-				}*/
-			],
-		},
-		options:{
-			title:{
-				fontSize:17
-			},
-			scale:{
-				scaleLabel:{
-					fontSize:17
-				},
-				ticks:{
-					min:0,
-					stepSize:10
+		$.each(cdata1,function(ind,val){
+			sum = 0;
+			
+			for(var i=0;i < $("#log form").length;i++){
+				if($("#log form").eq(logind + i).hasClass("sametime") || i == 0){
+					var thislog = $("#log form").eq(logind + i);
+					$.each($(thislog).children(".l-ing").children("div"),function(ind2,val2){
+						if(Number($(thislog).children(".l-ing").children("div").eq(ind2).data("fg")) == ind){
+							sum = sum + Number($(thislog).children(".l-ing").children("div").eq(ind2).children("p").eq(1).text());
+						}
+					});
+				}else{
+					break;
 				}
 			}
-		}
-	});
+			
+			if(sum > cdata1[ind] / 3){
+				cdata2.push(100);
+			}else{
+				cdata2.push(sum * 300 / cdata1[ind]);
+			}
+			
+		});
+
+		var ctx = $(".b-sheet");
+		
+		new Chart(ctx, {
+			type:"radar",
+			data:{
+				labels:["乳・乳製品","卵","魚介・肉","豆・豆製品","野菜","いも類","果物","穀物","油脂","砂糖"],
+				datasets:[
+
+					{
+						label:"あなたの摂取量",
+						data:cdata2,
+						backgroundColor:"rgba(60,138,175,0.3)",
+						borderWidth:3,
+						pointBackgroundColor:"rgba(60,138,175,1)",
+						borderColor:"rgba(60,138,175,1)",
+						pointBorderWidth:0
+					},
+					/*{
+						label:"めやすの摂取量",
+						data:[100,100,100,100,100,100,100,100,100,100],
+						backgroundColor:"rgba(200,200,200,0)",
+						borderWidth:3,
+						pointBackgroundColor:"rgba(1,1,1,0)",
+						pointerBorderColor:"rgba(0,0,0,0)",
+						borderColor:"rgba(200,200,200,1)",
+						pointBorderWidth:0
+					}*/
+				],
+			},
+			options:{
+				title:{
+					fontSize:17
+				},
+				scale:{
+					scaleLabel:{
+						fontSize:17
+					},
+					ticks:{
+						min:0,
+						stepSize:10
+					}
+				}
+			}
+		});
+	}
+	
 }
 makechart(0);
