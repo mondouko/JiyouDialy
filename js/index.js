@@ -12,30 +12,46 @@ var select = 0;
 var thislog = 0;
 var portion = 0;
 var code = "";
-
+localStorage.setItem("#log","");
 
 function savetows(code){
-	localStorage.setItem("log",code);
+	localStorage.setItem("#log",code);
 	localStorage.setItem("age",Number($("#age").val()));
 	localStorage.setItem("gender",Number($("#gender").val()));
 }
 
 function loading(){
-	var code = localStorage.getItem("log").split("&&&");
+	var code = localStorage.getItem("#log").split("&&&");
     $.each(code,function(ind,val){
     	console.log(val.split("{{")[1].split("}}")[0].split("&&"));
     	var block1 = val.split("{{")[0].split("&&");
     	var block2 = val.split("{{")[1].split("}}")[0].split("&&");
     	var block3 = val.split("{{")[1].split("}}")[1].split("&&");
-    	
-    	$("#log > h1").after('<form class = "edit ' + block1[2] + '" onsubmit = "return false" data-sum = "' + block1[4] + '" data-portion = "' + block1[5] + '"></form>');
+    	switch(block1[2]){
+    		case "朝食":
+    			var bldind = 0;
+    			break;
+    		case "昼食":
+    			var bldind = 1;
+    			break;
+    		case "夕食":
+    			var bldind = 2;
+    			break;
+    		case "間食":
+    			var bldind = 3;
+    			break;
+    	}
+
+    	$("#log > h1").after('<form class = "edit ' + bldclass[bldind] + '" onsubmit = "return false" data-sum = "' + block1[4] + '" data-portion = "' + block1[5] + '"></form>');
     	var thislog = $("#log form").eq(0);
-    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span>月<span class = "l-date">' + block1[1] + '日</span></p>');
+    	
+    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span>月<span class = "l-date">' + block1[1] + '日　' + bld[bldind] + '</span></p>');
     	$(thislog).append('<h2 class = "ingname">' + block1[3] + '</h2>');
+    	$(thislog).append('<div class = "l-chart"><p>食品群別摂取量チャート</p></div>');
     	if(window.innerWidth > 600){
-			$(thislog).append('<canvas class="b-sheet" width="400" height="200"></canvas>');
+			$(thislog).children(".l-chart").append('<canvas class="b-sheet" width="400" height="200"></canvas>');
 		}else{
-			$(thislog).append('<canvas class="b-sheet" width="200" height="200"></canvas>');
+			$(thislog).children(".l-chart").append('<canvas class="b-sheet" width="200" height="200"></canvas>');
 		}
     	$(thislog).append('<div class = "l-ing"><p>食品名と摂取量</p></div>');
 		for(var i=0;i < block2.length;i=i+3){
@@ -43,7 +59,9 @@ function loading(){
 		}
     });
 }
-loading();
+if(localStorage.getItem("#log") != ""){
+	loading();
+}
 function makecode(){
 	code = "";
 	$.each($("#log form"),function(ind,val){
@@ -62,13 +80,35 @@ function makecode(){
 };
 
 
-
+var lognum = 0;
 $("#submit").on("click",function(){
 	input = $("#editform input[type='text']");
 	select = $("#editform select");
-	$("#log h1").after('<form class = "edit ' +  bldclass[Number($(select).eq(2).prop("value"))] + '" onsubmit="return false" data-sum="' + $(input).eq(1).prop("value") + '" data-portion="' + $(input).eq(2).prop("value") + '"><p class = "l-time"><span class = "l-month">' + $(select).eq(0).prop("value") + '</span>月<span class = "l-date">' + $(select).eq(1).prop("value") + '</span>日　<span class = "l-bld">' + bld[Number($(select).eq(2).prop("value"))] + '</span></p><h2 class = "l-ingname">' + $(input).eq(0).prop("value") + '</h2></div>');
 	
-	thislog = $("#log form").eq(0);
+	
+	if($("#log form").length == 0){
+		lognum = 0;
+	}else{
+
+		var logdate = new Date($("#editform .year").children("input").prop("value"),Number($(select).eq(0).prop("value")) - 1,$(select).eq(1).prop("value"),Number($(select).eq(2).prop("value")),0,0);
+		$.each($("#log form"),function(ind,val){
+			var ltime = $("#log form").eq(ind).children(".l-time");
+			var logdate2 = new Date($("#log form").eq(ind).data("year"),Number($(ltime).children(".l-month").text()) - 1,$(ltime).children(".l-date").text(),$.inArray($(ltime).children(".l-bld").text(),bld),0,0);
+			if(logdate - logdate2 >= 0){
+				return false;
+			}
+			lognum = lognum + 1;
+		});
+		
+	}
+	var container = '<form class = "edit ' +  bldclass[Number($(select).eq(2).prop("value"))] + '" onsubmit="return false" data-sum="' + $(input).eq(1).prop("value") + '" data-portion="' + $(input).eq(2).prop("value") + '" data-year = "' + $("#editform .year").children("input").prop("value")+ '"><p class = "l-time"><span class = "l-month">' + $(select).eq(0).prop("value") + '</span>月<span class = "l-date">' + $(select).eq(1).prop("value") + '</span>日　<span class = "l-bld">' + bld[Number($(select).eq(2).prop("value"))] + '</span></p><h2 class = "l-ingname">' + $(input).eq(0).prop("value") + '</h2></div>';
+	if(lognum == $("#log form").length){
+		$("#log form").eq(lognum).after(container);
+	}else{
+		$("#log form").eq(lognum).before(container);
+	}
+	thislog = $("#log form").eq(lognum);
+	alert(lognum);
 	if(window.innerWidth > 600){
 		$(thislog).append('<canvas class="b-sheet" width="400" height="200"></canvas>');
 	}else{
@@ -87,7 +127,7 @@ $("#submit").on("click",function(){
 			$(thislog).children(".l-ing").append('<div data-fg = "' + $(select).eq(i + 3).val() + '"><p>' + $(input).eq(i * 2 + 3).prop("value") + '</p><p>' + Math.floor(Number($(input).eq(i * 2 + 4).prop("value")) * portion) + '</p></div>');
 		}
 	}
-	makechart(0);
+	makechart(lognum);
 	$(thislog).append('<p class = "l-comment">' + $(".comment").eq(0).val() + '</p>');
 	makecode();
 	savetows(code);
