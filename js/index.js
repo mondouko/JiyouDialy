@@ -117,7 +117,7 @@ $("#submit").on("click",function(){
 	}else{
 		portion = 1;
 		$(input).eq(1).prop("value",1);
-		$(input).eq(2).prop("value",1)
+		$(input).eq(2).prop("value",1);
 	}
 
 
@@ -166,6 +166,11 @@ $("#submit").on("click",function(){
 	$(thislog).append('<p class = "l-comment">' + $(".comment").eq(0).val() + '</p>');
 	makecode();
 	savetows(code);
+	$("#editform input").prop("value","");
+	for(var i=0;i < $("#editform .ingredients").length - 2;i++){
+		$("#editform .ingredients").last().remove();
+	}
+	$("#editform .year").children("input").prop("value","2020");
 });
 
 
@@ -176,6 +181,10 @@ $(document).on("click",".l-ing > p",function(){
 	$(this).toggleClass("show");
 });
 $(document).on("click",".daylog > p",function(){
+	$(this).parent().children("canvas").slideToggle(300);
+	$(this).toggleClass("show");
+});
+$(document).on("click",".l-chart > p",function(){
 	$(this).parent().children("canvas").slideToggle(300);
 	$(this).toggleClass("show");
 });
