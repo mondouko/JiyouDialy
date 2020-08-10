@@ -109,7 +109,7 @@ h1{
 .sametime .l-time{
 	display:none !important;
 }
-.sametime canvas{
+.sametime .l-chart{
 	display:none !important;
 }
 .sametime:after{
@@ -136,13 +136,13 @@ body > div:nth-of-type(3){
 	box-shadow:0 0 15px #aaaaaa;
 }
 @media(max-width:600px){
-	.edit{
+	.edit,.daylog{
 		width:calc(100vw - 40px - 40px) !important;
 		padding:20px;
 		margin-right:auto;
 		margin-left:auto;
 	}
-	#log .edit{
+	#log .edit,.daylog{
 		padding:0px 20px;
 	}
 }
@@ -216,9 +216,6 @@ textarea{
 	padding:0.5em ;
 }
 @media(max-width:500px){
-	.edit{
-
-	}
 	.edit h1{
 		text-align:center;
 	}
@@ -344,10 +341,10 @@ textarea{
 	background-color:#d3890f !important;
 }
 .dinner{
-	border-color:#75584e;
+	border-color:#997366;
 }
 .dinner .l-time{
-	background-color:#75584e !important;
+	background-color:#997366 /*#75584e*/ !important;
 }
 .snak{
 	border-color:#869b32;
@@ -372,4 +369,33 @@ textarea{
 		width:calc(100vw - 40px - 40px);
 		height:calc(100vw - 40px - 40px);
 	}
+}
+
+
+
+
+.daylog{
+	background-color:#f7f7f7;
+	border-radius:10px;
+	font-weight:bold;
+	padding:10px 20px;
+}
+.daylog p{
+	font-size:20px;
+	text-align:center;
+	cursor:pointer;
+	padding:0;
+	margin:0;
+}
+.daylog p:after{
+	font-family: "Font Awesome 5 Free";
+	content: "\f078";
+	margin-left:1em;
+	transition:all ease 0.3s;
+}
+.daylog .show:after{
+	transform:rotate(180deg) !important;
+}
+.daylog canvas{
+	display:none;
 }
