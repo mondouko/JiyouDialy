@@ -20,7 +20,7 @@ function savetows(code){
 }
 
 function loading(){
-	if(localStorage.getItem("log") == ""){
+	if(localStorage.getItem("log") == null){
 
 	}else{
 		var code = localStorage.getItem("log").split("&&&");
