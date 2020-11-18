@@ -20,61 +20,67 @@ function savetows(code){
 }
 
 function loading(){
-	var code = localStorage.getItem("log").split("&&&");
-    $.each(code,function(ind,val){
-    	var block1 = val.split("{{")[0].split("&&");
-    	var block2 = val.split("{{")[1].split("}}")[0].split("&&");
-    	var block3 = val.split("{{")[1].split("}}")[1].split("&&");
-    	switch(block1[2]){
-    		case "朝食":
-    			var bldind = 0;
-    			break;
-    		case "昼食":
-    			var bldind = 1;
-    			break;
-    		case "夕食":
-    			var bldind = 2;
-    			break;
-    		case "間食":
-    			var bldind = 3;
-    			break;
-    	}
+	if(localStorage.getItem("log") == ""){
 
-    	$("#log").append('<form class = "edit ' + bldclass[bldind] + '" onsubmit = "return false" data-sum = "' + block1[4] + '" data-portion = "' + block1[5] + '" data-year = "' + block3[1] + '" data-date = "' + block3[1] + "," + block1[0] + "," + block1[1] + '"></form>');
-    	var thislog = $("#log form").last();
-    	if(ind == 0 || $("#log form").eq($("#log form").length - 2).data("date") != $(thislog).data("date")){
-    		if(window.innerWidth > 600){
-    			$(thislog).before('<div class = "daylog" data-date = "' + $(thislog).data("date") + '"><p>' + block1[0] + "月" + block1[1] + "日の合計" + '</p><canvas width="400" height="200"></canvas></div>');
+	}else{
+		var code = localStorage.getItem("log").split("&&&");
+	    $.each(code,function(ind,val){
+	    	var block1 = val.split("{{")[0].split("&&");
+	    	var block2 = val.split("{{")[1].split("}}")[0].split("&&");
+	    	var block3 = val.split("{{")[1].split("}}")[1].split("&&");
+	    	switch(block1[2]){
+	    		case "朝食":
+	    			var bldind = 0;
+	    			break;
+	    		case "昼食":
+	    			var bldind = 1;
+	    			break;
+	    		case "夕食":
+	    			var bldind = 2;
+	    			break;
+	    		case "間食":
+	    			var bldind = 3;
+	    			break;
+	    	}
+
+	    	$("#log").append('<form class = "edit ' + bldclass[bldind] + '" onsubmit = "return false" data-sum = "' + block1[4] + '" data-portion = "' + block1[5] + '" data-year = "' + block3[1] + '" data-date = "' + block3[1] + "," + block1[0] + "," + block1[1] + '"></form>');
+	    	var thislog = $("#log form").last();
+	    	if(ind == 0 || $("#log form").eq($("#log form").length - 2).data("date") != $(thislog).data("date")){
+	    		if(window.innerWidth > 600){
+	    			$(thislog).before('<div class = "daylog" data-date = "' + $(thislog).data("date") + '"><p>' + block1[0] + "月" + block1[1] + "日の合計" + '</p><canvas width="400" height="200"></canvas></div>');
+				}else{
+					$(thislog).before('<div class = "daylog" data-date = "' + $(thislog).data("date") + '"><p>' + block1[0] + "月" + block1[1] + "日の合計" + '</p><canvas width="200" height="200"></canvas></div>');
+				}
+	    	}
+	    		
+	    	
+	   
+	    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span>月<span class = "l-date">' + block1[1] + '</span>日　<span class = "l-bld">' + bld[bldind] + '</span></p>');
+	    	$(thislog).append('<h2 class = "l-ingname">' + block1[3] + '</h2>');
+	    	$(thislog).append('<div class = "l-chart"><p>食品群別摂取量チャート</p></div>');
+	    	if(window.innerWidth > 600){
+				$(thislog).children(".l-chart").append('<canvas class="b-sheet" width="400" height="200"></canvas>');
 			}else{
-				$(thislog).before('<div class = "daylog" data-date = "' + $(thislog).data("date") + '"><p>' + block1[0] + "月" + block1[1] + "日の合計" + '</p><canvas width="200" height="200"></canvas></div>');
+				$(thislog).children(".l-chart").append('<canvas class="b-sheet" width="200" height="200"></canvas>');
 			}
-    	}
-    		
-    	
-   
-    	$(thislog).append('<p class = "l-time"><span class = "l-month">' + block1[0] + '</span>月<span class = "l-date">' + block1[1] + '</span>日　<span class = "l-bld">' + bld[bldind] + '</span></p>');
-    	$(thislog).append('<h2 class = "l-ingname">' + block1[3] + '</h2>');
-    	$(thislog).append('<div class = "l-chart"><p>食品群別摂取量チャート</p></div>');
-    	if(window.innerWidth > 600){
-			$(thislog).children(".l-chart").append('<canvas class="b-sheet" width="400" height="200"></canvas>');
-		}else{
-			$(thislog).children(".l-chart").append('<canvas class="b-sheet" width="200" height="200"></canvas>');
-		}
-    	$(thislog).append('<div class = "l-ing"><p>食品名と摂取量</p></div>');
-		for(var i=0;i < block2.length;i=i+3){
-			$(thislog).children(".l-ing").append('<div data-fg = "' + block2[i] + '"><p>' + block2[i + 1] + '</p><p>' + block2[i + 2] + '</p></div>')
-		}
-		$(thislog).append('<p class = "l-comment">' + block3[0] + '</p>');
+	    	$(thislog).append('<div class = "l-ing"><p>食品名と摂取量</p></div>');
+			for(var i=0;i < block2.length;i=i+3){
+				$(thislog).children(".l-ing").append('<div data-fg = "' + block2[i] + '"><p>' + block2[i + 1] + '</p><p>' + block2[i + 2] + '</p></div>')
+			}
+			$(thislog).append('<p class = "l-comment">' + block3[0] + '</p>');
 
-		var ltime = $(thislog).children(".l-time");
-		var logdate = new Date($(thislog).data("year"),Number($(ltime).children(".l-month").text()) - 1,$(ltime).children(".l-date").text(),$.inArray($(ltime).children(".l-bld").text(),bld),0,0);
-		var ltime = $("#log form").eq($("#log form").length - 2).children(".l-time");
-		var logdate2 = new Date($("#log form").eq($("#log form").length - 2).data("year"),Number($(ltime).children(".l-month").text()) - 1,$(ltime).children(".l-date").text(),$.inArray($(ltime).children(".l-bld").text(),bld),0,0);
-		if(logdate - logdate2 == 0 && $("#log form").length > 1){
-			$(thislog).addClass("sametime");
-		}
-    });
+			var ltime = $(thislog).children(".l-time");
+			var logdate = new Date($(thislog).data("year"),Number($(ltime).children(".l-month").text()) - 1,$(ltime).children(".l-date").text(),$.inArray($(ltime).children(".l-bld").text(),bld),0,0);
+			var ltime = $("#log form").eq($("#log form").length - 2).children(".l-time");
+			var logdate2 = new Date($("#log form").eq($("#log form").length - 2).data("year"),Number($(ltime).children(".l-month").text()) - 1,$(ltime).children(".l-date").text(),$.inArray($(ltime).children(".l-bld").text(),bld),0,0);
+			if(logdate - logdate2 == 0 && $("#log form").length > 1){
+				$(thislog).addClass("sametime");
+			}
+	    });
+	}
+	
 }
+
 if(localStorage.getItem("log") != ""){
 	loading();
 	$.each($("#log form"),function(ind,val){
@@ -85,6 +91,7 @@ if(localStorage.getItem("log") != ""){
 		makechart(i,1);
 	}
 }
+
 function makecode(){
 	code = "";
 	$.each($("#log form"),function(ind,val){
@@ -197,7 +204,7 @@ var sum = 0;
 
 
 function makechart(logind,op){
-	if($("#log form").eq(logind).hasClass("sametime")){
+	if(op != 1 && $("#log form").eq(logind).hasClass("sametime")){
 
 	}else{
 		cdata1 = [];
@@ -241,6 +248,8 @@ function makechart(logind,op){
 					cdata2.push(val * 100/ cdata1[ind]);
 				}
 			});
+			console.log(sum);
+			console.log(cdata2);
 			var ctx = $("#log .daylog").eq(logind).children("canvas");
 		}else{
 			var nutlist = [];
