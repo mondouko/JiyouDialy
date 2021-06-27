@@ -1,6 +1,7 @@
 $(document).on("click","#adding",function(){
 	$(this).before('<div class = "ingredients"><p>食品名</p><input class = "ingname" type = "text"><br><p>分類</p><select id = "fkind" name = "fkind"><option value = "0">乳・乳製品</option><option value = "1">卵</option><option value = "2">魚介・肉</option><option value = "3">豆・豆製品</option><option value = "4">野菜</option><option value = "5">いも類</option><option value = "6">果物</option><option value = "7">穀類</option><option value = "8">油脂</option><option value = "9">砂糖</option></select><p>使用量(g)</p><input  class = "weight" type = "text"><span>g</span></div>');	
 });
+alert("hello");
 
 var bld = ["朝食","昼食","夕食","間食"];
 var bldclass = ["breakfast","lunch","dinner","snak"];
